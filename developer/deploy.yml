@@ -1,0 +1,4 @@
+---
+- import_playbook: server.yml
+- import_playbook: neovim_setup.yml
+- import_playbook: postgres.yml

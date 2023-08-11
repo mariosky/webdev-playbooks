@@ -1,0 +1,27 @@
+---
+- name: Neovim Setup 
+  hosts: all
+  tasks:
+  - name: Install dependencies
+    become: yes
+    ansible.builtin.apt:
+      pkg:
+      - gcc
+  - name: Install Nvim
+    become: yes
+    community.general.snap:
+       name: "nvim"
+       classic: yes
+  - name: Install Packer
+    ansible.builtin.git:
+      repo: 'https://github.com/wbthomason/packer.nvim'
+      dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+      depth: 1
+  - name: Clone Config
+    ansible.builtin.git:
+      repo: 'https://github.com/mariosky/nvim.git'
+      dest: ~/.config/nvim
+      depth: 1
+  - name: Run Packer 
+    ansible.builtin.command: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+

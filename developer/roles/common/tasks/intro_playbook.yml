@@ -1,0 +1,21 @@
+---
+- name: Intro to ansible Playbooks
+  hosts: all
+  vars:
+    state: latest
+    user: developer
+  tasks:
+  - name: Add the user {{ user }}
+    become: yes
+    ansible.builtin.user:
+      name: "{{user}}"
+  - name: Upgrade
+    become: yes
+    apt:
+       force_apt_get: yes
+       upgrade: dist
+  - name: Install Nvim
+    become: yes
+    community.general.snap:
+       name: "nvim"
+       classic: yes

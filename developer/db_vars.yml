@@ -1,0 +1,10 @@
+# App Name
+app_name: django_bootstrap
+# Deployer User and Groups
+deployer_user: ubuntu
+deployer_group: ubuntu
+db_url: postgresql://{{deployer_user}}:{{db_password}}@localhost/{{app_name}}
+db_password: thisissomeseucrepassword
+db_name: "{{ app_name }}"
+db_user: "{{ deployer_user }}"
+

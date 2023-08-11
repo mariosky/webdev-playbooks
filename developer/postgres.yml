@@ -1,0 +1,51 @@
+---
+- name: Set up and configure postgres
+  hosts: all
+  vars_files:
+    - db_vars.yml
+  tasks:
+  - name: Install Postgres    
+    become: yes
+    ansible.builtin.apt:
+      pkg:
+      - libpq-dev 
+      - acl
+      - postgresql
+      - postgresql-contrib
+      - python3-psycopg2
+
+  - name: Start and enable postgres
+    service: name=postgresql enabled=yes state=started
+    become: yes
+
+  - name: Create database
+    community.postgresql.postgresql_db:
+      name: "{{ app_name }}"
+    become: yes
+    become_user: postgres
+
+  - name: Configure a new postgresql user
+    postgresql_user: db={{ app_name }}
+                          name={{ db_user }}
+                          password={{ db_password }}
+                          role_attr_flags=NOSUPERUSER
+    become: yes
+    become_user: postgres
+
+  - name: Configure a new postgresql user
+    postgresql_privs: 
+      db: "{{ app_name }}"
+      role: "{{ db_user }}"
+      privs: ALL
+      type: database
+    become: yes
+    become_user: postgres
+    notify:
+      - restart postgres
+
+  handlers:
+    - name: restart postgres
+      service: name=postgresql state=restarted
+      become: yes
+
+

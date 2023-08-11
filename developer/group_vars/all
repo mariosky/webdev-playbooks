@@ -1,0 +1,2 @@
+# App Directory
+app_dir: /home/{{ deployer_user }}/{{app_name}}
