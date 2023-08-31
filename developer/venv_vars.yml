@@ -1,3 +1,0 @@
-# Application Dependencies Setup
-venv_dir: '/home/{{ deployer_user }}/envs/{{ app_name }}'
-venv_python: '{{ venv_dir }}/bin/python3.5'

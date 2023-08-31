@@ -1,1 +1,3 @@
-- import_playbook: neovim_setup.yml 
+---
+- import_tasks: server.yml
+- import_tasks: neovim_setup.yml

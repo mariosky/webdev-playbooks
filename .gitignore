@@ -1,2 +1,4 @@
 *.pem
 hosts.yml
+hosts
+get-pip.py
