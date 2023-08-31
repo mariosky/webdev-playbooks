@@ -1,3 +1,20 @@
----
-- import_tasks: server.yml
-- import_tasks: neovim_setup.yml
+- name: Add the user {{ user }}
+  become: yes
+  ansible.builtin.user:
+    name: "{{user}}"
+
+- name: Upgrade
+  become: yes
+  apt:
+      force_apt_get: yes
+      upgrade: dist
+      update_cache: yes
+
+- name: Install dependencies
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+    - gcc
+    - python3-dev
+    - python3-virtualenv
+    - libpq-dev
