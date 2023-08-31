@@ -6,6 +6,8 @@ Se asume una máquina con Ubuntu 22.04.
 Se incluye:
 - nvim como editor
 - PostgreSQL
+
+Por hacer:
 - Se clona un repositorio con un proyecto de django en GitHub.
 - Se crea un ambiente virtual e instalan los requerimientos.
 
