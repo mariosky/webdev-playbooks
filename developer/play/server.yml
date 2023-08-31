@@ -1,5 +1,5 @@
 ---
-- name: Intro to ansible Playbooks
+- name: Update Server and Install Dependencies
   hosts: all
   vars:
     state: latest
