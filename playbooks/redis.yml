@@ -1,12 +1,13 @@
 ---
-- name: Instalar Redis 
+- name: Install Redis 
   hosts: all
   tasks:
-  - name: Ensure Redis is present
-    apt: pkg=redis-server state=latest
-    sudo: true
+  - name: Install Redis Server
+    become: yes
+    ansible.builtin.apt:
+      pkg:
+      - redis-server
 
   - name: Ensure Redis is started
     service: name=redis-server state=started enabled=yes
-    sudo: true
-
+    become: yes
