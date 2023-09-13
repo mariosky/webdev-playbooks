@@ -1,0 +1,12 @@
+---
+- name: Instalar Redis 
+  hosts: all
+  tasks:
+  - name: Ensure Redis is present
+    apt: pkg=redis-server state=latest
+    sudo: true
+
+  - name: Ensure Redis is started
+    service: name=redis-server state=started enabled=yes
+    sudo: true
+
